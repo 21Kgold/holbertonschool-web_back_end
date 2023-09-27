@@ -2,11 +2,11 @@
 '''
 9-element_length Module
 '''
-from typing import List, Tuple, Union, Set, Dict, Generator
+from typing import List, Tuple, Iterable, Sequence
 
 
-def element_length(lst: Union[Tuple, List, str, Set, Dict, Generator]) -> \
-        List[Tuple[Union[Tuple, List, str, Set, Dict, Generator, str], int]]:
+def element_length(lst: Iterable[Sequence]) -> \
+        List[Tuple[Sequence, int]]:
     '''
     This is a type-annotated function.
 
