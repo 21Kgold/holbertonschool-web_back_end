@@ -21,6 +21,6 @@ async def wait_n(n: int, max_delay: int = 10) -> List[float]:
     - List of floats: list of random delay for each routine
     '''
     # Create a list of n calls of the wait_random function
-    calls = [wait_random(max_delay) for _ in range(n)]
+    routineList = [wait_random(max_delay) for i in range(n)]
     # The * operator unpack the list
-    await asyncio.gather(*calls)
+    return await asyncio.gather(*routineList)
