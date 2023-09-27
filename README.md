@@ -1,0 +1,1 @@
+The back end refers to the part of a software system or website that is not usually visible or accessible to the user. It includes the server-side components and functionality that handle data processing, storage, and retrieval. The back end typically involves technologies and programming languages such as databases, server-side scripting, APIs, and frameworks.
