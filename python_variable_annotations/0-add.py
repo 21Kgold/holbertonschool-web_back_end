@@ -4,7 +4,7 @@ This module provides one function that perform a sum of two parameters.
 
 Usage:
  - Import: __import__('0-add').add
-     
+
 Note: This module requires Python 3.7 or above.
 '''
 
