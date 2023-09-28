@@ -9,11 +9,11 @@ task_wait_random = __import__('3-tasks').task_wait_random
 
 async def task_wait_n(n: int, max_delay: int = 10) -> List[float]:
     '''
-    This is a async routine that calls a async function task_wait_random
+    This is a async routine that calls a Task task_wait_random
     n times concurrently (coroutines)
 
     Parameters:
-    - n (int): times the async function task_wait_random will run concurrently
+    - n (int): times the Task task_wait_random will run concurrently
     - max_delay (int): upper limit of the random delay used by the
       task_wait_random function
 
@@ -22,7 +22,7 @@ async def task_wait_n(n: int, max_delay: int = 10) -> List[float]:
     '''
     tasks = [task_wait_random(max_delay) for i in range(n)]
     delayList = []
-    for task in tasks:
+    for task in asyncio.as_completed(tasks):
         delay_per_task = await task
         delayList.append(delay_per_task)
     return delayList
