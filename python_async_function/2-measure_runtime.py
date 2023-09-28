@@ -8,6 +8,9 @@ wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
 def measure_time(n: int, max_delay: int) -> float:
+    '''
+    Function that measure the runtime of wait_n coroutine
+    '''
     t0 = time()
     asyncio.run(wait_n(n, max_delay))
     t1 = time()
