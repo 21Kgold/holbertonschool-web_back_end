@@ -24,8 +24,9 @@ async def wait_n(n: int, max_delay: int = 10) -> List[float]:
     n_calls = [wait_random(max_delay) for i in range(n)]
 
     delayList = []
+    # as_completed allow us to manage the futures
     for call in asyncio.as_completed(n_calls):
-        # await, will pause a asynchronous operation until other is completed
+        # await will pause a asynchronous operation until other is completed
         delay_per_call = await call
         delayList.append(delay_per_call)
     return delayList
