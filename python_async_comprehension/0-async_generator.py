@@ -7,7 +7,7 @@ import random
 import typing
 
 
-async def async_generator() -> typing.Generator[float]:
+async def async_generator() -> typing.Generator[float, None, int]:
     '''
     Generator function
     '''

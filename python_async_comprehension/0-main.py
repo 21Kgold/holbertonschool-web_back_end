@@ -9,6 +9,8 @@ async def print_yielded_values():
     result = []
     async for i in async_generator():
         result.append(i)
+        # print(type(i))
     print(result)
+    
 
 asyncio.run(print_yielded_values())
