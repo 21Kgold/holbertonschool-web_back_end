@@ -5,7 +5,7 @@
 from typing import Sequence, Union, Any
 
 
-def safe_first_element(lst: Sequence) -> Union[Any, None]:
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
     '''
     Returns first element of a secuence when present
     '''
