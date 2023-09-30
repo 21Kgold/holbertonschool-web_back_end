@@ -7,7 +7,7 @@ from typing import List, Tuple
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
     '''
-    Add factor times, each element of a given List to a new List
+    Add factor times, each element of a given tuple to a new List
     '''
     zoomed_in: List = [
         item for item in lst
