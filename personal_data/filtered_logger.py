@@ -40,7 +40,7 @@ class RedactingFormatter(logging.Formatter):
                   %(message)s"
     SEPARATOR: str = ";"
 
-    def __init__(self, fields: List):
+    def __init__(self, fields: List[str]):
         """
         RedactingFormatter constructor
         """
