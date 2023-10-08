@@ -2,7 +2,7 @@
 """
 filtered_logger module
 """
-from typing import List
+from typing import List, Any
 import re
 import logging
 
@@ -47,7 +47,7 @@ class RedactingFormatter(logging.Formatter):
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
-    def format(self, record: logging.LogRecord) -> str:
+    def format(self, record: logging.LogRecord[Any]) -> str:
         """
         Filter values in incoming log record
         """
