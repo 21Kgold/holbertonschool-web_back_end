@@ -35,9 +35,10 @@ class RedactingFormatter(logging.Formatter):
     RedactingFormatter class
     """
 
-    REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
-    SEPARATOR = ";"
+    REDACTION: str = "***"
+    FORMAT: str = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: \
+                  %(message)s"
+    SEPARATOR: str = ";"
 
     def __init__(self, fields: List):
         """
