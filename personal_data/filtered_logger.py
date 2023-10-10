@@ -6,7 +6,7 @@ from typing import List
 import re
 import logging
 
-PII_FIELDS = ("name", "email", "phone", "password", "ip")
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
@@ -33,9 +33,12 @@ def filter_datum(fields: List[str], redaction: str, message: str,
 
 
 def get_logger() -> logging.Logger:
-
+    """
+    Create a logger that display info logs at the terminal
+    """
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
+    logger.propagate = False
 
     formatter = logging.Formatter(RedactingFormatter())
 
