@@ -42,11 +42,12 @@ def get_logger() -> logging.Logger:
     logger.setLevel(logging.INFO)
     logger.propagate = False
 
-    formatter = logging.Formatter(RedactingFormatter())
+    formatter = RedactingFormatter(list(PII_FIELDS))
 
     Stream_Handler = logging.StreamHandler()
-    Stream_Handler.setLevel(logging.INFO)
     Stream_Handler.setFormatter(formatter)
+    logger.addHandler(Stream_Handler)
+    return logger
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
@@ -73,8 +74,8 @@ class RedactingFormatter(logging.Formatter):
     """
 
     REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: \
-                  %(message)s"
+    FORMAT = "[HOLBERTON] \
+%(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
@@ -91,3 +92,37 @@ class RedactingFormatter(logging.Formatter):
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
+
+
+def main() -> mysql.connector.connection.MySQLConnection:
+    """
+    Retrieve all rows in the users table and display each row under
+    a filtered format
+    """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()  # rows as a list of tuples
+    fields = [field[0] for field in cursor.description]  # [Column names]
+    logger = get_logger()
+
+    # Format each row
+    for row in rows:
+        record = ""
+        for field, value in zip(fields, row):
+            record += "".join(f'{field}={value};')
+        logger.info(record)
+
+
+if __name__ == '__main__':
+    main()
+
+
+"""
+print(rows)
+[('Marlene Wood', 'hwestiii@att.net', '(473) 401-4253', ...),
+('Belen Bailey', 'bcevc@yahoo.com', '(539) 233-4942', ...)]
+
+print(column_names)
+['name', 'email', 'phone', 'ssn', 'password', 'ip', 'last_login', 'user_agent']
+"""
