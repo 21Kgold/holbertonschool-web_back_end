@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ test_utils module """
 
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 import unittest
 from unittest.mock import patch
 from parameterized import parameterized
@@ -51,3 +51,26 @@ class TestGetJson(unittest.TestCase):
         # Create instance of the class beng tested
         request = get_json(test_url)
         self.assertEqual(request, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """Test subclass"""
+    def test_memoize(self):
+        """Test method of memoize()"""
+        class TestClass:
+            """Test class"""
+            def a_method(self):
+                """a_method"""
+                return 42
+
+            @memoize
+            def a_property(self):
+                """decorator"""
+                return self.a_method()
+        # mock object represents the a_method attribute in the TestClass
+        with patch.object(TestClass, 'a_method') as mock:
+            test_class = TestClass()
+            test_class.a_property()
+            test_class.a_property()
+            # check the mocked method has been called exactly once
+            mock.assert_called_once()
