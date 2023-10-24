@@ -7,7 +7,8 @@ app = Flask(__name__)  # instance of the Flask class is created
 
 @app.route('/')
 def Hello_World():
-    return render_template('0-index.html', message='Hello world')
+    """Basic Hello World app"""
+    return render_template('0-index.html')
 
 
 if __name__ == '__main__':  # Ensure the app is only run when executed directly
