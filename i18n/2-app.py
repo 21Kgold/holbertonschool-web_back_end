@@ -24,7 +24,7 @@ def get_locale():
     """Function uses the request.accept_languages.best_match method to
     determine the best language match from provided options, based on the
     Accept-Language header sent by the browser."""
-    return request.accept_languages.best_match(Config.LANGUAGES)
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
