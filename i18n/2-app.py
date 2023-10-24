@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Babel default langage and timezone"""
-
 #  request represents the current HTTP request
 from flask import Flask, render_template, request
 from flask_babel import Babel
-import inspect
 
 
-class Config:
+class Config(object):
     """Class to configure available languages"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'en'
