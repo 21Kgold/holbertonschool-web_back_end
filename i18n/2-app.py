@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 """Babel default langage and timezone"""
 #  request represents the current HTTP request
-from flask import Flask, render_template, request
+from flask import Flask, request, render_template
 from flask_babel import Babel
-
-
-class Config(object):
-    """Class to configure available languages"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = 'en'
-    BABEL_DEFAULT_TIMEZONE = 'UTC'
-
 
 app = Flask(__name__)
 babel = Babel(app)
+
+class Config():
+    """Class to configure available languages"""
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
 app.config.from_object(Config)
 
 
-@babel.localeselector  # override the default behavior of Flask-Babel
+@babel.localeselector
 def get_locale():
     """Function uses the request.accept_languages.best_match method to
     determine the best language match from provided options, based on the
