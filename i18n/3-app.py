@@ -30,7 +30,7 @@ def get_locale():
 @app.route('/')
 def Hello_World():
     """Basic Hello World app"""
-    return render_template('2-index.html')
+    return render_template('3-index.html')
     # to test: replace return by: return get_locale()
 
 
