@@ -75,8 +75,6 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @call_history
-    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Function that stores the cashe store data in a Redis server and
         returns the key """
@@ -90,12 +88,12 @@ class Cache:
         """
             Retrieve the cashe data
         """
-        key = self._redit.get(key)
+        value = self._redit.get(key)
 
         if fn:
-            return fn(key)
+            return fn(value)
 
-        return key
+        return value
 
     def get_str(self, key: str) -> str:
         """ Parametrized get str """
@@ -108,5 +106,4 @@ class Cache:
             value = int(value.decode('utf-8'))
         except Exception:
             value = 0
-
         return value
