@@ -66,6 +66,7 @@ def replay(func: Callable):
 
         print(f'{func_name}(*{cin}) -> {cout}')
 
+
 class Cache:
     """ Cashe class """
 
