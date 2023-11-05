@@ -3,7 +3,7 @@
     String Redis
 """
 from uuid import uuid4
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 from functools import wraps
 import redis
 
@@ -83,8 +83,8 @@ class Cache:
 
         return key
 
-    def get(self, key: str, fn: Callable = None)\
-            -> Union[str, bytes, int, float]:
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """
             Retrieve the cashe data
         """
