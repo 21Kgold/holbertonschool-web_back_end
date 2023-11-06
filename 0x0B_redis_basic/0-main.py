@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Main file
-"""
+""" Main file """
 import redis
 
 Cache = __import__('exercise').Cache
@@ -14,3 +12,12 @@ print(key)
 
 local_redis = redis.Redis()
 print(local_redis.get(key))
+
+cache1 = Cache()
+
+data = "world"
+key = cache1.store(data)
+print(key)
+
+print(cache1.get(key))
+print(cache1.get(data))
