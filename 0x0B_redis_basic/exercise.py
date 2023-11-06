@@ -71,7 +71,7 @@ class Cache:
     """ Cashe class """
 
     def __init__(self):
-        """ Cashe class Constructor that starts the connection to a Redis
+        """ Cache class Constructor that starts the connection to a Redis
         server. I also clears all the data from the Redis server """
         self._redis = redis.Redis()
         self._redis.flushdb()
@@ -79,8 +79,8 @@ class Cache:
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
-        """ Function that stores the cashe store data in a Redis server and
-        returns the key """
+        """ Stores key/data in _redis variable to the Redis
+        server and returns the key """
         key = str(uuid4())
         self._redis.set(key, data)
 
@@ -88,10 +88,8 @@ class Cache:
 
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
-        """
-            Retrieve the cashe data
-        """
-        value = self._redit.get(key)
+        """ Using key, retrieve data with original type """
+        value = self._redis.get(key)
 
         if fn:
             return fn(value)
@@ -100,7 +98,7 @@ class Cache:
 
     def get_str(self, key: str) -> str:
         """ Parametrized get str """
-        return self._redit.get(key).decode("utf-8")
+        return self._redis.get(key).decode("utf-8")
 
     def get_int(self, key: str) -> int:
         """ Parametrized get int """
