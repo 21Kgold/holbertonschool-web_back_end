@@ -9,13 +9,13 @@ import redis
 
 
 def count_calls(method: Callable = None) -> Callable:
-    """ Decorator count calls """
-    name = method.__qualname__
+    """ Decorator to count how many times Cache class methods are called """
+    key = method.__qualname__
 
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """ Wrapper method """
-        self._redis.incr(name)
+        self._redis.incr(key)
         return method(self, *args, **kwargs)
 
     return wrapper
@@ -27,6 +27,7 @@ def call_history(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """ Wraper function """
+        #  input arguments (args) are converted to a string
         input: str = str(args)
         self._redis.rpush(method.__qualname__ + ":inputs", input)
 
@@ -38,33 +39,33 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(func: Callable):
+def replay(method: Callable):
     """ Replay function """
-    r = redis.Redis()
-    func_name = func.__qualname__
-    number_calls = r.get(func_name)
+    redis_connection = redis.Redis()
+    method_name = method.__qualname__
+    number_calls = redis_connection.get(method_name)
 
     try:
-        number_calls = number_calls.decode('utf-8')
+        number_calls = number_calls.decode()
     except Exception:
         number_calls = 0
 
-    print(f'{func_name} was called {number_calls} times:')
+    print(f'{method_name} was called {number_calls} times:')
 
-    ins = r.lrange(func_name + ":inputs", 0, -1)
-    outs = r.lrange(func_name + ":outputs", 0, -1)
+    input = redis_connection.lrange(method_name + ":inputs", 0, -1)
+    output = redis_connection.lrange(method_name + ":outputs", 0, -1)
 
-    for cin, cout in zip(ins, outs):
+    for data, random_key in zip(input, output):
         try:
-            cin = cin.decode('utf-8')
+            data = data.decode()
         except Exception:
-            cin = ""
+            data = ""
         try:
-            cout = cout.decode('utf-8')
+            random_key = random_key.decode()
         except Exception:
-            cout = ""
+            random_key = ""
 
-        print(f'{func_name}(*{cin}) -> {cout}')
+        print(f'{method_name}(*{data}) -> {random_key}')
 
 
 class Cache:
@@ -79,7 +80,7 @@ class Cache:
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
-        """ Stores key/data in _redis variable to the Redis
+        """ Creates random key, stores key/data in _redis variable to the Redis
         server and returns the key """
         random_key = str(uuid4())
         self._redis.set(random_key, data)
@@ -88,21 +89,21 @@ class Cache:
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ Using key, retrieve data with original type """
-        value = self._redis.get(key)
+        bit_data = self._redis.get(key)  # If key doesn't exist bit_data=None
 
         if fn:
-            return fn(value)
+            return fn(bit_data)
 
-        return value
+        return bit_data
 
     def get_str(self, key: str) -> str:
-        """ Parametrized get str """
+        """ bit to string conversion """
         bit_data = self._redis.get(key)
         string_data = bit_data.decode()
         return string_data
 
     def get_int(self, key: str) -> int:
-        """ Parametrized get int """
+        """ bit to integer conversion """
         bit_data = self._redis.get(key)
         try:
             int_data = int(bit_data.decode())
