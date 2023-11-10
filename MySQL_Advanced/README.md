@@ -4,15 +4,15 @@
 
 RDBMS stands for Relational Database Management System. It is a software system used to manage and organize relational databases. RDBMS stores data in the form of tables, which consist of rows and columns. It provides a structured approach to store and retrieve data, ensuring data integrity, scalability, and security. Examples of RDBMS include MySQL, Oracle, Microsoft SQL Server, and PostgreSQL.
 
-MySQL is a widely used relational database management system (RDBMS). MySQL is free and open-source. MySQL is ideal for both small and large applications. Huge websites like Facebook, Twitter, Airbnb, Booking.com, Uber, GitHub, YouTube, etc. use MySQL.
+[MySQL](https://devhints.io/mysql) is a widely used relational database management system (RDBMS). MySQL is free and open-source. MySQL is ideal for both small and large applications. Huge websites like Facebook, Twitter, Airbnb, Booking.com, Uber, GitHub, YouTube, etc. use MySQL.
 
 SQL, on the other hand, is a language used to communicate with and manipulate data in an RDBMS. SQL stands for Structured Query Language. SQL is used to define the structure of the database, perform queries, and manage the data stored in the RDBMS.
 
-How to create tables with constraints
-How to optimize queries by adding indexes
-What is and how to implement stored procedures and functions in MySQL
-What is and how to implement views in MySQL
-What is and how to implement triggers in MySQL
+* How to [create tables](https://dev.mysql.com/doc/refman/5.7/en/create-table.html) with [constraints](https://dev.mysql.com/doc/refman/5.7/en/functions.html).
+* How to [optimize queries](https://www.liquidweb.com/kb/mysql-optimization-how-to-leverage-mysql-database-indexing/) by adding indexes
+* What is and how to [implement stored procedures](https://www.w3resource.com/mysql/mysql-procedure.php) and [functions](https://dev.mysql.com/doc/refman/5.7/en/create-procedure.html) in MySQL
+* What is and how to [implement views](https://www.w3resource.com/mysql/mysql-views.php) in MySQL
+* What is and how to implement [triggers](https://www.w3resource.com/mysql/mysql-triggers.php) in MySQL
 
 ---
 
