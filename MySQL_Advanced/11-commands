@@ -1,0 +1,7 @@
+#!/bin/bash
+# Div function
+
+cat 11-init.sql | mysql -uroot -p holberton
+mysql -u root -p -e "DESCRIBE holberton.metal_bands;"
+cat 11-need_meeting.sql | mysql -uroot -p holberton
+cat 11-main.sql | mysql -uroot -p holberton
