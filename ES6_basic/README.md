@@ -3,6 +3,18 @@
 ## Description
 ES6 is the sixth version of the ECMAScript programming language. ECMAScript is the standardized name for JavaScript, and ES6 is a major enhancement to the JavaScript language. It was published in 2015 and introduced several new features and improvements to make JavaScript code more modern, readable, and efficient.
 
+Node.js is an open-source, cross-platform JavaScript runtime environment built on Chrome's V8 JavaScript engine. It allows developers to run JavaScript code outside of a web browser, making it possible to use JavaScript for server-side development. Node.js provides an event-driven, non-blocking I/O model that makes it efficient and scalable for building network applications.
+
+* What ES6 is
+* New features introduced in ES6
+* The difference between a constant and a variable
+* Block-scoped variables
+* Arrow functions and function parameters default to them
+* Rest and spread function parameters
+* String templating in ES6
+* Object creation and their properties in ES6
+* Iterators and for-of loops
+
 ## Setup
 ```
 $ lsb_release -a
@@ -26,7 +38,6 @@ $ npm -v
 ```
 
 Install Jest, Babel, and ESLint in your project directory:
-
 ```
 $ npm install --save-dev jest
 $ npm install --save-dev babel-jest @babel/core @babel/preset-env
@@ -34,21 +45,11 @@ $ npm install --save-dev eslint
 ```
 
 Include the configuration files:
-* package.json
-* babel.config.js
-* .eslintrc.js
+* [package.json](./package.json)
+* [babel.config.js](./babel.config.js)
+* [.eslintrc.js](./.eslintrc.js)
 
 Finally, run `npm install` from the terminal of your project folder to install all necessary project dependencies.
-
-What ES6 is
-New features introduced in ES6
-The difference between a constant and a variable
-Block-scoped variables
-Arrow functions and function parameters default to them
-Rest and spread function parameters
-String templating in ES6
-Object creation and their properties in ES6
-Iterators and for-of loops
 
 ---
 
