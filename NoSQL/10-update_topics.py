@@ -9,5 +9,4 @@ def update_topics(mongo_collection, name, topics):
     filter = {"name": name}
     new_record = {"$set": {'topics': topics}}
 
-    result = mongo_collection.update_many(filter, new_record, upsert=True)
-    return result
+    mongo_collection.update_many(filter, new_record, upsert=True)
