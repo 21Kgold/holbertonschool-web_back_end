@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""  """
+""" Update pymongo records module """
 import pymongo
 
 
