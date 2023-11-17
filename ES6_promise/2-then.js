@@ -1,21 +1,22 @@
-function handleResponseFromAPI(promise) {
+function getFullResponseFromAPI(success) {
   const myPromise = new Promise(((myResolve, myReject) => {
-    if (promise === true) {
+    if (success === true) {
       myResolve({
         status: 200,
         body: 'Success',
       });
     } else {
-      myReject(new Error());
+      myReject(new Error('The fake API is not working currently'));
     }
   }));
 
   /*eslint-disable*/
     myPromise.then(
-      (value) => { console.log("Got a response from the API") },
-      (error) => { console.log("Got a response from the API") },
-    );
+      (value) => { value; },
+      (error) => { error; },
+    ).finally(() => console.log('Got a response from the API'));
     return myPromise;
   }
   
-  export default handleResponseFromAPI;
+  export default getFullResponseFromAPI;
+  
