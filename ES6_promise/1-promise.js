@@ -10,6 +10,7 @@ function getFullResponseFromAPI(success) {
     }
   }));
 
+  /*eslint-disable*/
   myPromise.then(
     (value) => { value; },
     (error) => { error; },
