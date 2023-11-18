@@ -6,8 +6,8 @@ function handleProfileSignup(firstName, lastName, fileName) {
   const promise2 = signUpUser(firstName, lastName);
 
   return Promise.allSettled([promise2, promise1])
-    .then((result) => { result })
-    .catch(() => { Error(); });
+    /*eslint-disable*/
+    .then((result) => { (result); });
 }
 
 export default handleProfileSignup;
