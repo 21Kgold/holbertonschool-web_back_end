@@ -5,11 +5,9 @@ function handleProfileSignup(firstName, lastName, fileName) {
   const promise1 = uploadPhoto(fileName);
   const promise2 = signUpUser(firstName, lastName);
 
-  return Promise.allSettled([promise1, promise2])
-    .then((result) => {{ result };
-    }).catch(() => {
-      Error();
-    });
+  return Promise.allSettled([promise2, promise1])
+    .then((result) => { result })
+    .catch(() => { Error(); });
 }
 
 export default handleProfileSignup;
