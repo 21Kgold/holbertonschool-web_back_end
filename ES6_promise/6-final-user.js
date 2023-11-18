@@ -6,8 +6,7 @@ function handleProfileSignup(firstName, lastName, fileName) {
   const promise2 = signUpUser(firstName, lastName);
 
   return Promise.allSettled([promise1, promise2])
-    .then((result) => {
-      console.log({ result });
+    .then((result) => {{ result };
     }).catch(() => {
       Error();
     });
