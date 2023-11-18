@@ -5,9 +5,10 @@ function handleProfileSignup(firstName, lastName, fileName) {
   const promise1 = uploadPhoto(fileName);
   const promise2 = signUpUser(firstName, lastName);
 
-  return Promise.allSettled([promise2, promise1])
-    /*eslint-disable*/
-    .then((result) => { result });
+  return Promise.allSettled([promise2, promise1]);
+  /* Remember to relocate the ; after unquote
+    .then((result) => { console.log(result) })
+     */
 }
 
 export default handleProfileSignup;
