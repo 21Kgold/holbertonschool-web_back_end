@@ -1,11 +1,13 @@
 import { uploadPhoto, createUser } from './utils';
 
 function handleProfileSignup() {
+  const promise1 = uploadPhoto();
+  const promise2 = createUser();
 
-  Promise.all([uploadPhoto(), createUser()]).then((value) => {
-    /* console.log(value); */
-    const { body } = value[0];
-    const { firstName, lastName } = value[1];
+  return Promise.all([promise1, promise2]).then((result) => {
+    /* console.log(result); */
+    const { body } = result[0];
+    const { firstName, lastName } = result[1];
     console.log(`${body} ${firstName} ${lastName}`);
   /*eslint-disable*/
   }).catch(() => {
