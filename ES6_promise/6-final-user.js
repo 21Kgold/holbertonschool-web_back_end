@@ -7,7 +7,7 @@ function handleProfileSignup(firstName, lastName, fileName) {
 
   return Promise.allSettled([promise2, promise1])
     /*eslint-disable*/
-    .then((result) => { (result); });
+    .then((result) => { result });
 }
 
 export default handleProfileSignup;
