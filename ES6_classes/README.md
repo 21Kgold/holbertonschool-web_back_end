@@ -185,3 +185,22 @@ $ npm run dev 9-main.js
   'Jason Sandler - 2019 - San Francisco'
 ]
 ```
+
+### [10. Vroom](./10-car.js)
+
+* Implement a class named Car:
+    - Constructor attributes:
+        + brand (String)
+        + motor (String)
+        + color (String)
+* Each attribute must be stored in an “underscore” attribute version (ex: name is stored in _name)
+* Add a method named cloneCar. This method should return a new object of the class. Hint: Symbols in ES6
+
+```
+$ npm run dev 10-main.js 
+TestCar { _brand: 'Nissan', _motor: 'Turbo', _color: 'Pink' }
+true
+TestCar { _brand: undefined, _motor: undefined, _color: undefined }
+true
+false
+```
