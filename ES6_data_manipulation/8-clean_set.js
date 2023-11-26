@@ -2,7 +2,7 @@ function cleanSet(set, startString) {
   const slicePosition = startString.length;
   let newString = '';
 
-  if (startString !== '') {
+  if (slicePosition !== 0 && typeof (startString) === 'string') {
     set.forEach((element) => {
       const match = element.slice(0, slicePosition);
       if (match === startString) {
