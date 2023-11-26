@@ -1,5 +1,5 @@
 function setFromArray(array) {
-  new Set(array);
+  return new Set(array);
 }
 
 export default setFromArray;
