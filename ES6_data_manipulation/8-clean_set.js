@@ -1,16 +1,15 @@
 function cleanSet(set, startString) {
-  const slicePosition = startString.length;
   let newString = '';
 
-  if (startString !== '' && typeof (startString) === 'string') {
+  if (startString !== '' && typeof (startString) === 'string' && arguments.length === 2) {
+    const slicePosition = startString.length;
     set.forEach((element) => {
-      const match = element.slice(0, slicePosition);
-      if (match === startString) {
-        const substring = element.slice(slicePosition);
-        if (substring.slice(substring.length - 1) === '-') {
-            substring = substring.slice(0, -1)
+      if (typeof (element) === 'string') {
+        const match = element.slice(0, slicePosition);
+        if (match === startString) {
+          const substring = element.slice(slicePosition);
+          newString = `${newString + substring}-`;
         }
-        newString = `${newString + substring}-`;
       }
     });
     newString = newString.slice(0, -1);
