@@ -3,7 +3,7 @@ function createInt8TypedArray(length, position, value) {
   const objectDataView = new DataView(binaryDataBuffer);
 
   if (position > length - 1) {
-    throw new Error('Position exceeds range');
+    throw new Error('Position outside range');
   }
 
   objectDataView.setInt8(position, value);
