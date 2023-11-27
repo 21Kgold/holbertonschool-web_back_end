@@ -1,16 +1,12 @@
-const readline = require('readline');
+console.log('Welcome to Holberton School, what is your name?');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+process.stdin.on('readable', () => {
+  const myName = process.stdin.read();
+  if (myName !== null) {
+    console.log(`Your name is: ${myName}`);
+  }
 });
 
-rl.question('Welcome to Holberton School, what is your name?\n', (name) => {
-  if (name.toLowerCase() === 'exit' || name.toLowerCase() === 'end') {
-    console.log('This important software is now closing\n');
-    process.exit();
-  } else {
-    console.log(`Your name is: ${name}`);
-    process.exit();
-  }
+process.stdin.on('end', () => {
+  console.log('This important software is now closing');
 });
