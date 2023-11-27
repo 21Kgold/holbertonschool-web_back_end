@@ -2,9 +2,7 @@
 
 ## Description
 
-* [Arrays](https://www.w3schools.com/jsref/jsref_obj_array.asp) are a special type of objects.
-* How do I know if a variable is an array, and the Array.isArray() method
-* How to use map, filter and reduce on arrays
+* How to use isArray, map, filter and reduce on [arrays](https://www.w3schools.com/jsref/jsref_obj_array.asp)
 * Typed arrays
 * The [Set](https://www.w3schools.com/js/js_sets.asp), [Map](https://www.w3schools.com/js/js_maps.asp), and Weak link data structures
 
