@@ -6,10 +6,11 @@ const rl = readline.createInterface({
 });
 
 rl.question('Welcome to Holberton School, what is your name? ', (name) => {
-  if (name.toLowerCase() === 'exit' || name.toLowerCase() === 'quit') {
+  if (name.toLowerCase() === 'exit' || name.toLowerCase() === 'end') {
     console.log('This important software is now closing');
     process.exit();
   } else {
     console.log(`Your name is: ${name}`);
+    process.exit();
   }
 });
