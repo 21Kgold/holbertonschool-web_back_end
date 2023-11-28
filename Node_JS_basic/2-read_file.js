@@ -28,7 +28,8 @@ function countStudents(filePath) {
     });
     return obj;
   });
-  process.stdout.write(`Number of students: ${arrayStudents.length}\n`);
+  const NUMBER_OF_STUDENTS = arrayStudents.length;
+  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
 
   // Array of field per student
   const fieldsStudents = arrayStudents.map((student) => student.field);
@@ -47,13 +48,14 @@ function countStudents(filePath) {
     filteredArray[fieldName] = filteredNames;
   }
 
-  Object.keys(filteredArray).forEach((key) => {
-    let studentList = '';
-     filteredArray[key].forEach((element) => {
-      studentList = `${studentList + element}, `;
+  Object.keys(filteredArray).forEach((FIELD) => {
+    let LIST_OF_FIRSTNAMES = '';
+     filteredArray[FIELD].forEach((element) => {
+      LIST_OF_FIRSTNAMES = `${LIST_OF_FIRSTNAMES + element}, `;
     });
-    const newStudentList = studentList.slice(0, -2);
-    process.stdout.write(`Number of students in ${key}: ${filteredArray[key].length}. List: ${newStudentList}\n`);
+    LIST_OF_FIRSTNAMES = LIST_OF_FIRSTNAMES.slice(0, -2);
+    const NUMBER_OF_STUDENTS_FIELD = filteredArray[FIELD].length;
+    console.log(`Number of students in ${FIELD}: ${NUMBER_OF_STUDENTS_FIELD}. List: ${LIST_OF_FIRSTNAMES}`);
   });
 }
 
