@@ -8,7 +8,7 @@ function countStudents(filePath) {
   } catch (err) {
     throw new Error('Cannot load the database');
   }
-  const linesArray = contentString.split('\r\n');
+  const linesArray = contentString.split('\n');
   const keysArray = linesArray[0].split(',');
   const recordsArray = linesArray.slice(1);
 
@@ -28,7 +28,7 @@ function countStudents(filePath) {
     });
     return obj;
   });
-  console.log(`Number of students: ${arrayStudents.length}`);
+  process.stdout.write(`Number of students: ${arrayStudents.length}\n`);
 
   // Array of field per student
   const fieldsStudents = arrayStudents.map((student) => student.field);
@@ -53,7 +53,7 @@ function countStudents(filePath) {
       studentList = `${studentList + element}, `;
     });
     const newStudentList = studentList.slice(0, -2);
-    console.log(`Number of students in ${key}: ${filteredArray[key].length}. List: ${newStudentList}`);
+    process.stdout.write(`Number of students in ${key}: ${filteredArray[key].length}. List: ${newStudentList}\n`);
   });
 }
 
