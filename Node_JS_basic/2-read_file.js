@@ -1,61 +1,49 @@
 const fs = require('fs');
 
 function countStudents(filePath) {
-  let contentString;
+  let fileContent;
 
   try {
-    contentString = fs.readFileSync(filePath, 'utf8');
+    fileContent = fs.readFileSync(filePath, 'utf8');
   } catch (err) {
     throw new Error('Cannot load the database');
   }
-  const linesArray = contentString.split('\n');
-  const keysArray = linesArray[0].split(',');
-  const recordsArray = linesArray.slice(1);
+  const arrayOfLines = fileContent.split('\n');
+  const arrayOfHeaders = arrayOfLines[0].split(',');
 
-  // Create an array of arrays
-  /* eslint-disable */
-  const valuesArrays = recordsArray.map((row) => {
-    if (row.trim() !== '') {
-      return row.split(',');
-    }
-  });
+  const arraysOfRecords = arrayOfLines.slice(1)
+    .filter((row) => row.trim() !== '')
+    .map((row) => row.split(','));
 
-  // Create an array of objects
-  const arrayStudents = valuesArrays.map((valueArray) => {
+  const arrayOfStudentObjects = arraysOfRecords.map((array) => {
     const obj = {};
-    keysArray.forEach((key, index) => {
-      obj[key] = valueArray[index];
+    arrayOfHeaders.forEach((key, index) => {
+      obj[key] = array[index];
     });
     return obj;
   });
-  const NUMBER_OF_STUDENTS = arrayStudents.length;
-  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
 
-  // Array of field per student
-  const fieldsStudents = arrayStudents.map((student) => student.field);
+  console.log(`Number of students: ${arrayOfStudentObjects.length}`);
 
-  // Clean repeated fields
-  const fieldsSet = new Set(fieldsStudents);
+  const allFieldNames = arrayOfStudentObjects
+    .map((obj) => obj.field);
 
-  // Create object per field
-  const filteredArray = {};
+  const fieldNames = new Set(allFieldNames);
 
-  for (const fieldName of fieldsSet) {
-    const filteredNames = arrayStudents
+  // Object, where fieldName is the key and an array of firstnames is the value
+  const fieldsObject = {};
+
+  for (const fieldName of fieldNames) {
+    const filteredNames = arrayOfStudentObjects
       .filter((obj) => obj.field === fieldName)
       .map((obj) => obj.firstname);
 
-    filteredArray[fieldName] = filteredNames;
+    fieldsObject[fieldName] = filteredNames;
   }
 
-  Object.keys(filteredArray).forEach((FIELD) => {
-    let LIST_OF_FIRSTNAMES = '';
-     filteredArray[FIELD].forEach((element) => {
-      LIST_OF_FIRSTNAMES = `${LIST_OF_FIRSTNAMES + element}, `;
-    });
-    LIST_OF_FIRSTNAMES = LIST_OF_FIRSTNAMES.slice(0, -2);
-    const NUMBER_OF_STUDENTS_FIELD = filteredArray[FIELD].length;
-    console.log(`Number of students in ${FIELD}: ${NUMBER_OF_STUDENTS_FIELD}. List: ${LIST_OF_FIRSTNAMES}`);
+  Object.keys(fieldsObject).forEach((FIELD) => {
+    const LIST_OF_FIRSTNAMES = fieldsObject[FIELD].join(', ');
+    console.log(`Number of students in ${FIELD}: ${fieldsObject[FIELD].length}. List: ${LIST_OF_FIRSTNAMES}`);
   });
 }
 
