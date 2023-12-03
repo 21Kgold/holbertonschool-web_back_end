@@ -18,7 +18,7 @@ const app = http.createServer(async (req, res) => {
     res.write('This is the list of our students');
     try {
       const students = await countStudents(databaseName);
-      res.end(`${students}`);
+      res.end(`${students.join('\n')}`);
     } catch (error) {
       res.end(error.message);
     }
