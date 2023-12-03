@@ -6,14 +6,20 @@ const app = http.createServer(async (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === '/') {
     res.write('Hello Holberton School!');
-  } if (req.url === '/students') {
+  } else if (req.url === '/students') {
     res.write('This is the list of our students\n');
     try {
       const students = await countStudents(process.argv[2]);
-      res.end(JSON.stringify(students));
+      if (students) {
+        res.write(`${students.join('\n')}`);
+      } else {
+        res.end('No students found');
+      }
     } catch (error) {
       res.end(error.message);
     }
+  } else {
+    res.end('404, Resource Not Found');
   }
   res.end();
 });
