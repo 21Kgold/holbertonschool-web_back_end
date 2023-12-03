@@ -23,7 +23,8 @@ const app = http.createServer(async (req, res) => {
       res.end(error.message);
     }
   } else {
-    res.end('404, Resource Not Found');
+    res.statusCode = 404;
+    res.end();
   }
 });
 
