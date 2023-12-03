@@ -12,6 +12,10 @@ describe('calculateNumber', function () {
     assert.strictEqual(calculateNumber(1, 3.7), 5);
   });
 
+  it('Round to nearest the sum of one decimal and one integer', function () {
+    assert.strictEqual(calculateNumber(3.7, 1), 5);
+  });
+
   it('Round to nearest the sum of two decimals', function () {
     assert.strictEqual(calculateNumber(1.2, 3.7), 5);
   });
