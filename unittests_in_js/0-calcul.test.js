@@ -1,5 +1,5 @@
 // 0-calcul.test.js
-const assert = require('assert').strict;
+const assert = require('assert');
 const mocha = require('mocha');
 const calculateNumber = require('./0-calcul.js');
 
