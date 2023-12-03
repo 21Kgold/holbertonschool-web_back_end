@@ -5,8 +5,7 @@ const args = process.argv;
 const databaseName = args[2];
 
 const app = http.createServer(async (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
+  res.writeHead(200, { 'Content-Type': 'text/html' });
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
