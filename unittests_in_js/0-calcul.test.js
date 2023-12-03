@@ -24,5 +24,9 @@ describe('calculateNumber', function () {
     assert.strictEqual(calculateNumber(1.5, 3.7), 6);
   });
 
+  it('Round to nearest even the sum of midpoint decimal', function () {
+    assert.strictEqual(calculateNumber(3.7, 1.5), 6);
+  });
+
   // Add more test cases as needed
 });
