@@ -4,11 +4,6 @@ const countStudents = require('./3-read_file_async');
 const args = process.argv;
 const databaseName = args[2];
 
-if (args.length < 3) {
-  console.error('Please provide the database name as an argument');
-  process.exit(1);
-}
-
 const app = http.createServer(async (req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
