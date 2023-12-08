@@ -127,31 +127,122 @@ Redis client connected to the server
 
 ### [2. Node Redis client and basic operations](./1-redis_op.js)
 
+```
+...queuing_system_in_js/redis-6.0.10$ ps ax
+  PID TTY      STAT   TIME COMMAND
+14608 pts/0    Sl     0:00 ./src/redis-server *:6379
+14675 pts/0    R+     0:00 ps ax
+...queuing_system_in_js/redis-6.0.10$ npm run dev 1-redis_op.js
+Redis client connected to the server
+School
+Reply: OK
+100
+```
+
 * C
 
 ### [3. Node Redis client and async operations](./2-redis_op_async.js)
 
 * C
+```
+...queuing_system_in_js/redis-6.0.10$ npm run dev 2-redis_op_async.js
+Redis client connected to the server
+Reply: OK
+School
+100
+```
 
 ### [4. Node Redis client and advanced operations](./4-redis_advanced_op.js)
 
 * C
+```
+...queuing_system_in_js/redis-6.0.10$ npm run dev 4-redis_advanced_op.js
+Redis client connected to the server
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+{
+  Portland: '50',
+  Seattle: '80',
+  'New York': '20',
+  Bogota: '20',
+  Cali: '40',
+  Paris: '2,'
+}
+```
 
 ### [5. Node Redis client publisher and subscriber](./5-publisher.js)
+The Publish/Subscribe pattern implemented by Redis, allows for the decoupling of components by enabling one component (the publisher) to publish messages, and other components (subscribers) to receive those messages through a message broker.
 
 * C
 
-### [6. Create the Job creator](./6-job_creator.js)
+Terminal 1
+```
+...queuing_system_in_js/redis-6.0.10$ npm run dev 5-subscriber.js
+Redis client connected to the server
+Holberton Student #1 starts course
+Holberton Student #2 starts course
+KILL_SERVER
+[nodemon] clean exit - waiting for changes before restart
+```
+Terminal 2
+```
+...queuing_system_in_js/redis-6.0.10$ npm run dev 5-publisher.js
+Redis client connected to the server
+About to send Holberton Student #1 starts course
+About to send Holberton Student #2 starts course
+About to send KILL_SERVER
+About to send Holberton Student #3 starts course
+```
 
+### [6. Create the Job creator](./6-job_creator.js)
+Install Kue
+```
+npm install kue
+```
+
+```
+...queuing_system_in_js/redis-6.0.10$ npm run dev 6-job_creator.js
+Notification job created: 4
+```
 * C
 
 ### [7. Create the Job processor](./6-job_processor.js)
 
 * C
 
+Terminal 2
+```
+.../queuing_system_in_js$ npm run dev 6-job_processor.js
+Sending notification to 4153518780, with message: This is the code to verify your account
+```
+
+Terminal 1
+```
+.../queuing_system_in_js/redis-6.0.10$ npm run dev 6-job_creator.js
+Notification job created: 5
+```
+
 ### [8. Track progress and errors with Kue: Create the Job creator](./7-job_creator.js)
 
 * C
+```
+.../queuing_system_in_js/redis-6.0.10$ npm run dev 7-job_creator.js
+Notification job created: 7
+Notification job created: 8
+Notification job created: 9
+Notification job created: 10
+Notification job created: 11
+Notification job created: 12
+Notification job created: 13
+Notification job created: 14
+Notification job created: 15
+Notification job created: 16
+Notification job created: 17
+```
 
 ### [9. Track progress and errors with Kue: Create the Job processor](./7-job_processor.js)
 
