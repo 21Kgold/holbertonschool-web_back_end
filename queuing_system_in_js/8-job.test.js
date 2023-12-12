@@ -1,80 +1,61 @@
-import createPushNotificationsJobs from './8-job';
 import { createQueue } from 'kue';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import chai from 'chai';
-import kue from 'kue';
-
+import createPushNotificationsJobs from './8-job';
 
 chai.use(chaiAsPromised);
-const queue = createQueue();
+
 const jobType = 'push_notification_code_3';
-const mockJobData = [
-    {
-      phoneNumber: '252525',
-      message: 'Verify your phone number'
-    },
-    {
-      phoneNumber: '363636',
-      message: 'Verify your account'
-    }
+const mockJobs = [
+  {
+    phoneNumber: '4153518780',
+    message: 'This is the code 1234 to verify your account',
+  },
+  {
+    phoneNumber: '4153518781',
+    message: 'This is the code 4562 to verify your account',
+  },
 ];
 
-const notArray = "Not an array";
+const notArray = 'Not an array';
+describe('createPushNotificationsJobs', () => {
+  const queue = createQueue();
+  it('should throw an error if argument is not an array', () => {
+    expect(() => createPushNotificationsJobs(notArray, queue)).to.throw(Error, 'Jobs is not an array');
+  });
 
-describe('testing', () => {
-    before(function() {
-        queue.testMode.enter();
-      });
-      
-      afterEach(function() {
-        queue.testMode.clear();
-      });
-      
-      after(function() {
-        queue.testMode.exit()
-      });
-      
-      it('job creator', function() {
-        mockJobData.forEach((element) => {
-            queue.createJob(jobType, element).save();
-        })
+  it('should create the correct number of jobs, with the correct data and correct type', async () => {
+    createPushNotificationsJobs(mockJobs, queue);
 
-        expect(queue.testMode.jobs.length).to.equal(2);
-        expect(queue.testMode.jobs[0].type).to.equal(jobType);
-        expect(queue.testMode.jobs[0].data).to.eql({ phoneNumber: '252525',
-        message: 'Verify your phone number' });
-        expect(queue.testMode.jobs[1].type).to.equal(jobType);
-        expect(queue.testMode.jobs[1].data).to.eql({ phoneNumber: '363636',
-        message: 'Verify your account' });
-      });
-
-      it('should create a job with the correct data', async () => {
-        // Create a new Kue queue
-        const queue = kue.createQueue();
-    
-        // Define the test data
-        const testData = [
-          { data: 'data1' },
-          { data: 'data2' },
-          { data: 'data3' },
-        ];
-    
-        // Call the createPushNotificationsJobs function
-        createPushNotificationsJobs(testData, queue);
-    
-        // Wait for the job to be saved
-        await new Promise((resolve) => queue.on('job enqueue', resolve));
-    
-        // Retrieve the job from the queue
-        const job = await new Promise((resolve) => {
-          queue.process('push_notification_code_3', 1, (job, done) => {
-            done();
+    // Wait for the job to be completed
+    const processedJobs = [];
+    let counter = 0;
+    await new Promise((resolve) => queue.on('job enqueue', resolve));
+    await new Promise((resolve) => {
+      queue.process(jobType, mockJobs.length, (job, done) => {
+        if (job) {
+          done();
+          processedJobs.push(job);
+          counter += 1;
+          if (counter === mockJobs.length) {
             resolve(job);
-          });
-        });
-    
-        // Assert that the job has the correct data
-        expect(job.data).to.deep.equal(testData[0]);
+          }
+        } else {
+          done();
+        }
       });
+    });
+    processedJobs.forEach((job) => {
+      console.log('job id and data');
+      console.log(job.id);
+      console.log(job.data);
+    });
+
+    // Assert that the job has the correct data
+    for (let i = 0; i < mockJobs.length; i++) {
+      expect(processedJobs[i].data).deep.equal(mockJobs[i]);
+      expect(processedJobs[i].type).deep.equal(jobType);
+    }
+    expect(processedJobs.length).equal(mockJobs.length);
+  });
 });
