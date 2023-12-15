@@ -8,7 +8,7 @@ suscriber.on('error', (errorMessage) => {
 });
 
 suscriber.on('ready', () => {
-  console.log("Redis client connected to the server");
+  console.log('Redis client connected to the server');
 });
 
 suscriber.on('message', (chanel, message) => {

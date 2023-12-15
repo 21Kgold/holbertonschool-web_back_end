@@ -4,12 +4,12 @@ import util from 'util';
 const client = redis.createClient();
 const getAsync = util.promisify(client.get).bind(client);
 
-client.on("error", (errorMessage) => {
+client.on('error', (errorMessage) => {
   console.log(`Redis client not connected to the server: ${errorMessage}`);
 });
 
-client.on("ready", () => {
-  console.log("Redis client connected to the server");
+client.on('ready', () => {
+  console.log('Redis client connected to the server');
 });
 
 function setNewSchool(myKey, myValue) {
@@ -17,7 +17,7 @@ function setNewSchool(myKey, myValue) {
     if (error) {
       console.log(`Error: ${error}`);
     } else {
-        console.log(`Reply: ${reply}`);
+      console.log(`Reply: ${reply}`);
     }
   });
 }
